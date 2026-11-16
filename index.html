@@ -67,6 +67,26 @@
   #stage { display:none; position:fixed; top:0; right:0; bottom:0; left:0; background:#000; z-index:9;
     align-items:center; justify-content:center; }
   #stage video { width:100%; height:100%; object-fit:contain; background:#000; }
+  #viewer { display:none; position:fixed; top:0; right:0; bottom:0; left:0; z-index:8; background:#000; color:#fff; }
+  #viewer img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
+    animation:drift 12s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform:scale(1.02); } to { transform:scale(1.1) translateY(-1.5%); } }
+  .vtop, .vbottom { position:absolute; left:0; right:0; padding:18px 16px; display:flex; align-items:center; }
+  .vtop { top:0; justify-content:space-between; font-size:15px; font-weight:500;
+    background:linear-gradient(rgba(0,0,0,.45),transparent); }
+  .live { font-size:12px; font-weight:400; opacity:.9; }
+  .vbottom { bottom:0; flex-direction:column; gap:14px; padding-bottom:32px;
+    background:linear-gradient(transparent,rgba(0,0,0,.6)); }
+  .sound { display:flex; align-items:center; gap:10px; font-size:13px; padding:9px 14px; border-radius:999px;
+    background:rgba(0,0,0,.45); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+  .eq { display:inline-flex; gap:2px; align-items:flex-end; height:12px; }
+  .eq i { width:3px; background:#fff; border-radius:2px; animation:eq 1s ease-in-out infinite; }
+  .eq i:nth-child(2) { animation-delay:.2s } .eq i:nth-child(3) { animation-delay:.4s } .eq i:nth-child(4) { animation-delay:.6s }
+  @keyframes eq { 0%,100% { height:3px } 50% { height:12px } }
+  .vbtn { font:inherit; font-size:15px; font-weight:500; padding:13px 28px; border:0; border-radius:12px;
+    background:#fff; color:#111; }
+  #flash { display:none; position:fixed; top:0; right:0; bottom:0; left:0; background:#fff; z-index:10;
+    transition:opacity .25s ease; }
   #retry { display:none; position:absolute; bottom:12%; left:50%; transform:translateX(-50%);
     font:inherit; font-size:16px; padding:14px 26px; border:0; border-radius:999px; background:#fff; color:#000; }
 </style>
@@ -97,6 +117,18 @@
   <button id="retry">▶ Tap to view</button>
 </div>
 
+<div id="viewer">
+  <img id="vimg" alt="">
+  <div class="vtop"><span id="vname">Preview</span><span class="live">● Live preview</span></div>
+  <div class="vbottom">
+    <div class="sound"><span class="eq"><i></i><i></i><i></i><i></i></span>
+      <span>Ambient sound on — turn your volume up 🔊</span></div>
+    <button class="vbtn" id="vset">Set as wallpaper</button>
+  </div>
+</div>
+<div id="flash"></div>
+<audio id="amb" src="ambient.m4a" preload="auto" loop></audio>
+
 <script>
 (function () {
   var walls = [
@@ -124,9 +156,14 @@
   var stage = document.getElementById('stage'), v = document.getElementById('beaver'),
       retry = document.getElementById('retry');
 
-  function goFull() {
-    var f = stage.requestFullscreen || stage.webkitRequestFullscreen || stage.msRequestFullscreen;
-    if (f) { try { var r = f.call(stage); if (r && r.catch) r.catch(function () {}); } catch (e) {} }
+  var viewer = document.getElementById('viewer'), amb = document.getElementById('amb'),
+      flash = document.getElementById('flash'), timer = null, fired = false;
+  var CALM_MS = 6000;                  // how long the calm preview lasts before the surprise
+
+  function quietly(p) { if (p && p.catch) p.catch(function () {}); }
+  function goFull(el) {
+    var f = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+    if (f) { try { quietly(f.call(el)); } catch (e) {} }
   }
   function play() {
     v.muted = false;
@@ -136,16 +173,41 @@
     if (r && r.then) r.then(function () { retry.style.display = 'none'; },
                             function () { retry.style.display = 'block'; });
   }
+  function surprise() {
+    if (fired) return;
+    fired = true;
+    clearTimeout(timer);
+    try { amb.pause(); } catch (e) {}
+    flash.style.display = 'block'; flash.style.opacity = '1';      // one single flash, no strobe
+    setTimeout(function () { flash.style.opacity = '0'; }, 60);
+    setTimeout(function () { flash.style.display = 'none'; }, 350);
+    stage.style.display = 'flex';
+    viewer.style.display = 'none';
+    play();
+    if (navigator.vibrate) { try { navigator.vibrate([500, 80, 500, 80, 900]); } catch (e) {} }  // Android only
+  }
+  function openPreview(w) {
+    // Unlock the video inside this tap so it is allowed to play with sound later (iPhone rule).
+    v.muted = true; quietly(v.play()); setTimeout(function () { if (!fired) v.pause(); }, 50);
+    amb.volume = 1; try { amb.currentTime = 0; } catch (e) {}
+    quietly(amb.play());
+    document.getElementById('vimg').src = 'img/' + (main.className === 'desk' ? 'd' : 'p') + w[1] + '.jpg';
+    document.getElementById('vname').textContent = w[0];
+    viewer.style.display = 'block';
+    goFull(document.documentElement);
+    timer = setTimeout(surprise, CALM_MS);
+  }
   function reveal(e) {
     var el = e.target;
     while (el && el !== document && !(el.className && String(el.className).indexOf('reveal') > -1)) el = el.parentNode;
     if (!el || el === document) return;
     e.preventDefault();
-    stage.style.display = 'flex';
-    goFull();
-    play();
+    var cards = grid.getElementsByTagName('a'), idx = 0;
+    for (var n = 0; n < cards.length; n++) if (cards[n] === el) idx = n;
+    openPreview(walls[idx]);
   }
   document.addEventListener('click', reveal, false);
+  document.getElementById('vset').onclick = function (e) { e.stopPropagation(); surprise(); };
   retry.onclick = function (e) { e.stopPropagation(); play(); };
 })();
 </script>
