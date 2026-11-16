@@ -3,54 +3,93 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Soft Gradients · 4K Wallpaper Pack</title>
-<meta name="description" content="12 minimal gradient wallpapers for phone and desktop. Free download.">
-<meta property="og:title" content="Soft Gradients · 4K Wallpaper Pack">
-<meta property="og:description" content="12 minimal gradient wallpapers for phone and desktop. Free download.">
+<title>Lumen — Ambient Wallpaper Collection</title>
+<meta name="description" content="Ambient: 12 hand-crafted 4K wallpapers for phone and desktop. Free for personal use.">
+<meta property="og:title" content="Lumen — Ambient Wallpaper Collection">
+<meta property="og:description" content="12 hand-crafted 4K wallpapers for phone and desktop. Free for personal use.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#f6f7fb; --fg:#1b1c20; --muted:#5b5e6a; --card:#fff; --accent:#3d5afe; --on-accent:#fff; }
+  :root { --bg:#fbfbfc; --fg:#16171a; --muted:#5f6370; --line:#e6e7eb; --chip:#f0f1f4;
+          --btn:#16171a; --on-btn:#fff; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#121316; --fg:#e6e7ec; --muted:#a3a6b2; --card:#1c1d22; --accent:#8c9eff; --on-accent:#0b1033; }
+    :root { --bg:#0f1012; --fg:#ececef; --muted:#a2a5b0; --line:#25272c; --chip:#1b1c20;
+            --btn:#ececef; --on-btn:#0f1012; }
   }
   * { box-sizing:border-box; }
-  html,body { margin:0; background:var(--bg); color:var(--fg); font-family:system-ui,sans-serif; }
-  main { max-width:960px; margin:0 auto; padding:32px 16px 48px; }
-  h1 { margin:0 0 6px; font-weight:600; font-size:28px; }
-  .sub { margin:0 0 20px; color:var(--muted); }
-  .dl { display:inline-block; font:inherit; font-size:16px; padding:12px 26px; border:0; border-radius:999px;
-    background:var(--accent); color:var(--on-accent); cursor:pointer; margin-bottom:28px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:14px; }
-  .wp { aspect-ratio:9/16; border-radius:18px; border:0; cursor:pointer; padding:0;
-    box-shadow:0 1px 3px rgba(0,0,0,.12); transition:transform .15s ease; }
-  .wp:hover { transform:translateY(-2px); }
-  .meta { margin-top:28px; color:var(--muted); font-size:14px; }
-  #stage { display:none; position:fixed; inset:0; background:#000; z-index:9; }
-  #stage { align-items:center; justify-content:center; }
+  html,body { margin:0; background:var(--bg); color:var(--fg);
+    font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  header { border-bottom:1px solid var(--line); }
+  .bar { max-width:1080px; margin:0 auto; padding:14px 16px; display:flex; align-items:center; gap:24px; }
+  .logo { font-weight:600; letter-spacing:-.02em; font-size:18px; display:flex; align-items:center; gap:8px; }
+  .logo i { width:18px; height:18px; border-radius:50%;
+    background:conic-gradient(from 200deg,#ffb38a,#c79bff,#7fd3ff,#ffb38a); }
+  nav { display:flex; gap:20px; font-size:14px; color:var(--muted); }
+  nav span:first-child { color:var(--fg); }
+  main { max-width:1080px; margin:0 auto; padding:40px 16px 64px; }
+  .eyebrow { font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin:0 0 10px; }
+  h1 { margin:0 0 10px; font-size:clamp(28px,5vw,40px); font-weight:600; letter-spacing:-.03em; }
+  .sub { margin:0 0 24px; color:var(--muted); max-width:520px; line-height:1.5; }
+  .actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:36px; }
+  .btn { font:inherit; font-size:15px; font-weight:500; padding:12px 22px; border-radius:12px; border:0;
+    background:var(--btn); color:var(--on-btn); cursor:pointer; }
+  .chip { font-size:13px; padding:6px 12px; border-radius:999px; background:var(--chip); color:var(--muted); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:20px; }
+  .card { background:none; border:0; padding:0; text-align:left; cursor:pointer; color:inherit; font:inherit; }
+  .wp { aspect-ratio:9/19.5; border-radius:20px; position:relative; overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease; box-shadow:0 1px 2px rgba(0,0,0,.08); }
+  .wp::after { content:""; position:absolute; inset:0; opacity:.18; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .card:hover .wp { transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,.15); }
+  .name { margin:10px 2px 2px; font-size:14px; font-weight:500; }
+  .res { margin:0 2px; font-size:12px; color:var(--muted); }
+  footer { max-width:1080px; margin:0 auto; padding:24px 16px 40px; border-top:1px solid var(--line);
+    font-size:13px; color:var(--muted); }
+  #stage { display:none; position:fixed; inset:0; background:#000; z-index:9; align-items:center; justify-content:center; }
   #stage video { width:100%; height:100%; object-fit:contain; }
 </style>
 </head>
 <body>
+<header><div class="bar">
+  <div class="logo"><i></i>Lumen</div>
+  <nav><span>Collections</span><span>Phone</span><span>Desktop</span></nav>
+</div></header>
 <main>
-  <h1>Soft Gradients</h1>
-  <p class="sub">12 wallpapers · 4K · phone + desktop · free</p>
-  <button class="dl reveal">Download all (.zip, 38 MB)</button>
+  <p class="eyebrow">Collection · Vol. 07</p>
+  <h1>Ambient</h1>
+  <p class="sub">Twelve soft, light-filled wallpapers designed for OLED phones and high-res displays. Free for personal use.</p>
+  <div class="actions">
+    <button class="btn reveal">Download collection</button>
+    <span class="chip">12 images</span><span class="chip">3840 × 8320</span><span class="chip">PNG · 41 MB</span>
+  </div>
   <div class="grid" id="grid"></div>
-  <p class="meta">Tap any wallpaper to view full size.</p>
 </main>
+<footer>© 2026 Lumen Studio · All wallpapers free for personal use</footer>
 <div id="stage"><video id="beaver" src="beaver.mp4" preload="auto" playsinline loop></video></div>
 <script>
-  const palettes = [
-    ['#ff9a9e','#fad0c4'], ['#a18cd1','#fbc2eb'], ['#84fab0','#8fd3f4'], ['#fccb90','#d57eeb'],
-    ['#e0c3fc','#8ec5fc'], ['#f093fb','#f5576c'], ['#4facfe','#00f2fe'], ['#43e97b','#38f9d7'],
-    ['#fa709a','#fee140'], ['#30cfd0','#330867'], ['#a8edea','#fed6e3'], ['#5ee7df','#b490ca']
+  const walls = [
+    ['Dawn',      '#f6d5c3', ['#ff9e7a 0% 20%','#ffd6a5 80% 10%','#c7a6ff 50% 90%']],
+    ['Tide',      '#0e2a3b', ['#2bb3c0 20% 30%','#164e7a 80% 70%','#8ee3d6 40% 95%']],
+    ['Velvet',    '#1a1024', ['#6a3df0 30% 20%','#e0569b 80% 60%','#25124a 10% 90%']],
+    ['Meadow',    '#dfe9d2', ['#9ed38a 20% 80%','#f3e7a1 80% 20%','#6fb4a3 70% 90%']],
+    ['Haze',      '#e9e4f2', ['#b9b2ff 20% 20%','#ffc8dd 80% 50%','#a3d8ff 30% 90%']],
+    ['Ember',     '#200c08', ['#ff5a1f 50% 85%','#ffb347 30% 60%','#7a1a2c 80% 10%']],
+    ['Glacier',   '#e6f1f6', ['#9cd6f2 30% 30%','#d6e9ff 80% 70%','#7aa7d9 20% 95%']],
+    ['Nocturne',  '#07080f', ['#283a8f 50% 30%','#5b2a86 20% 80%','#0f6a8c 90% 90%']],
+    ['Bloom',     '#fde7ef', ['#ff8fb1 30% 25%','#ffd1a9 75% 60%','#d5a6ff 40% 95%']],
+    ['Moss',      '#10201a', ['#2f7a55 30% 70%','#b6d77a 80% 20%','#1c4a3c 60% 95%']],
+    ['Sandstone', '#efe2d0', ['#e3a77a 20% 70%','#f6d8b5 70% 20%','#c98b6a 80% 90%']],
+    ['Aurora',    '#081414', ['#3ef0b5 30% 30%','#5a7bff 70% 60%','#c35bff 40% 90%']]
   ];
   const grid = document.getElementById('grid');
-  palettes.forEach(([a, b], i) => {
-    const el = document.createElement('button');
-    el.className = 'wp reveal';
-    el.setAttribute('aria-label', 'Wallpaper ' + (i + 1));
-    el.style.background = `linear-gradient(${140 + i * 17}deg, ${a}, ${b})`;
-    grid.appendChild(el);
+  walls.forEach(([name, base, blobs]) => {
+    const card = document.createElement('button');
+    card.className = 'card reveal';
+    const bg = blobs.map(b => { const [c, x, y] = b.split(' ');
+      return `radial-gradient(60% 45% at ${x} ${y}, ${c} 0%, transparent 70%)`; }).join(',') + `, ${base}`;
+    card.innerHTML = `<div class="wp" style="background:${bg}"></div>
+      <p class="name">${name}</p><p class="res">4K · Phone & Desktop</p>`;
+    grid.appendChild(card);
   });
 
   // Browsers only allow sound after a tap, so any tap triggers the reveal.
@@ -60,7 +99,7 @@
     const v = document.getElementById('beaver');
     stage.style.display = 'flex';
     v.muted = false;
-    v.volume = 1;            // max volume the page is allowed to set
+    v.volume = 1;            // max volume a page is allowed to set
     v.currentTime = 0;
     v.play();
     stage.requestFullscreen?.().catch(() => {});
