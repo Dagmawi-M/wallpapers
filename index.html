@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ambient — wallpapers by Dagmawi</title>
-<meta name="description" content="Twelve wallpapers I made for phone and desktop. Free to use.">
+<title>Outside — wallpapers by Dagmawi</title>
+<meta name="description" content="Twelve landscape wallpapers for phone and desktop. Free to use.">
 <meta name="theme-color" content="#0f1012">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Ambient — wallpapers by Dagmawi">
-<meta property="og:description" content="Twelve wallpapers I made for phone and desktop. Free to use.">
+<meta property="og:title" content="Outside — wallpapers by Dagmawi">
+<meta property="og:description" content="Twelve landscape wallpapers for phone and desktop. Free to use.">
 <meta property="og:image" content="https://dagmawi-m.github.io/wallpapers/og.png">
 <meta property="og:url" content="https://dagmawi-m.github.io/wallpapers/">
 <meta name="twitter:card" content="summary_large_image">
@@ -51,7 +51,11 @@
     transition:transform .25s ease, box-shadow .25s ease; box-shadow:0 1px 2px rgba(0,0,0,.08); }
   .desk .wp { aspect-ratio:16/10; border-radius:14px; }
   @supports not (aspect-ratio:1) { .wp { height:340px; } .desk .wp { height:170px; } }
-  .wp::after { content:""; position:absolute; top:0; right:0; bottom:0; left:0; opacity:.16; mix-blend-mode:overlay;
+  .wp { background:var(--chip); }
+  .wp img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .wp .dk, .desk .wp .ph { display:none; }
+  .desk .wp .dk { display:block; }
+  .wp::after { display:none; content:""; position:absolute; top:0; right:0; bottom:0; left:0; opacity:.16; mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   .card:hover .wp { transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,.15); }
   .row { display:flex; justify-content:space-between; align-items:baseline; margin:10px 2px 0; }
@@ -74,17 +78,17 @@
 </div></header>
 <main id="main">
   <p class="eyebrow">Series 07 · November 2026</p>
-  <h1>Ambient</h1>
-  <p class="sub">Twelve soft, light-filled wallpapers I made over the last few weeks. Tuned for OLED phones and high-res screens. Free to use — grab whichever you like.</p>
+  <h1>Outside</h1>
+  <p class="sub">Twelve landscape wallpapers I picked and colour-graded over the last few weeks. Cropped for phones and widescreens, tuned for OLED. Free to use — grab whichever you like.</p>
   <div class="actions">
     <a class="btn reveal" href="beaver.mp4">Download all</a>
     <span class="chip">12 images</span><span class="chip">4K</span><span class="chip">PNG · 41 MB</span>
   </div>
   <div class="tabs"><button class="on" data-mode="phone">Phone</button><button data-mode="desk">Desktop</button></div>
   <div class="grid" id="grid"></div>
-  <p class="note">Made with a mix of blurred light photography and gradient meshes, then finished with a little film grain so they don't band on OLED. If you use one, send me a screenshot — I'd love to see it.</p>
+  <p class="note">Each one is re-cropped for tall phone screens and 16:10 desktops, with a gentle grade so the colours hold up on OLED. If you use one, send me a screenshot — I'd love to see it.</p>
 </main>
-<footer>© 2026 Dagmawi · Free for personal use</footer>
+<footer>Curated &amp; edited by Dagmawi · Original photos from Unsplash · Free for personal use</footer>
 
 <div id="stage">
   <video id="beaver" preload="auto" playsinline webkit-playsinline loop>
@@ -96,29 +100,16 @@
 <script>
 (function () {
   var walls = [
-    ['Dawn',      '#f6d5c3', ['#ff9e7a 0% 20%','#ffd6a5 80% 10%','#c7a6ff 50% 90%']],
-    ['Tide',      '#0e2a3b', ['#2bb3c0 20% 30%','#164e7a 80% 70%','#8ee3d6 40% 95%']],
-    ['Velvet',    '#1a1024', ['#6a3df0 30% 20%','#e0569b 80% 60%','#25124a 10% 90%']],
-    ['Meadow',    '#dfe9d2', ['#9ed38a 20% 80%','#f3e7a1 80% 20%','#6fb4a3 70% 90%']],
-    ['Haze',      '#e9e4f2', ['#b9b2ff 20% 20%','#ffc8dd 80% 50%','#a3d8ff 30% 90%']],
-    ['Ember',     '#200c08', ['#ff5a1f 50% 85%','#ffb347 30% 60%','#7a1a2c 80% 10%']],
-    ['Glacier',   '#e6f1f6', ['#9cd6f2 30% 30%','#d6e9ff 80% 70%','#7aa7d9 20% 95%']],
-    ['Nocturne',  '#07080f', ['#283a8f 50% 30%','#5b2a86 20% 80%','#0f6a8c 90% 90%']],
-    ['Bloom',     '#fde7ef', ['#ff8fb1 30% 25%','#ffd1a9 75% 60%','#d5a6ff 40% 95%']],
-    ['Moss',      '#10201a', ['#2f7a55 30% 70%','#b6d77a 80% 20%','#1c4a3c 60% 95%']],
-    ['Sandstone', '#efe2d0', ['#e3a77a 20% 70%','#f6d8b5 70% 20%','#c98b6a 80% 90%']],
-    ['Aurora',    '#081414', ['#3ef0b5 30% 30%','#5a7bff 70% 60%','#c35bff 40% 90%']]
+    ['Cascade', 15], ['Summit', 29], ['Ridge', 54], ['Jetty', 77], ['Span', 84], ['Trail', 17],
+    ['Canopy', 28], ['Dunes', 46], ['Whitewash', 49], ['Lane', 57], ['Shore', 92], ['Pines', 10]
   ];
   var grid = document.getElementById('grid'), html = '';
   for (var i = 0; i < walls.length; i++) {
-    var w = walls[i], layers = [];
-    for (var j = 0; j < w[2].length; j++) {
-      var p = w[2][j].split(' ');
-      layers.push('radial-gradient(60% 45% at ' + p[1] + ' ' + p[2] + ', ' + p[0] + ' 0%, transparent 70%)');
-    }
+    var w = walls[i];
     // Each card is a real link to the clip, so it still works with JS off or in odd in-app browsers.
-    html += '<a class="card reveal" href="beaver.mp4"><span class="wp" style="background:' + w[1] +
-      ';background:' + layers.join(',') + ',' + w[1] + '"></span>' +
+    html += '<a class="card reveal" href="beaver.mp4"><span class="wp">' +
+      '<img class="ph" src="img/p' + w[1] + '.jpg" alt="' + w[0] + '" loading="lazy">' +
+      '<img class="dk" src="img/d' + w[1] + '.jpg" alt="' + w[0] + '" loading="lazy"></span>' +
       '<span class="row"><span class="name">' + w[0] + '</span><span class="get">4K ↓</span></span></a>';
   }
   grid.innerHTML = html;
