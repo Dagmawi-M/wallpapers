@@ -25,7 +25,8 @@
   .wp:hover { transform:translateY(-2px); }
   .meta { margin-top:28px; color:var(--muted); font-size:14px; }
   #stage { display:none; position:fixed; inset:0; background:#000; z-index:9; }
-  #stage iframe { width:100%; height:100%; border:0; }
+  #stage { align-items:center; justify-content:center; }
+  #stage video { width:100%; height:100%; object-fit:contain; }
 </style>
 </head>
 <body>
@@ -36,7 +37,7 @@
   <div class="grid" id="grid"></div>
   <p class="meta">Tap any wallpaper to view full size.</p>
 </main>
-<div id="stage"></div>
+<div id="stage"><video id="beaver" src="beaver.mp4" preload="auto" playsinline loop></video></div>
 <script>
   const palettes = [
     ['#ff9a9e','#fad0c4'], ['#a18cd1','#fbc2eb'], ['#84fab0','#8fd3f4'], ['#fccb90','#d57eeb'],
@@ -56,9 +57,12 @@
   document.addEventListener('click', e => {
     if (!e.target.closest('.reveal')) return;
     const stage = document.getElementById('stage');
-    stage.innerHTML = '<iframe allow="autoplay; fullscreen" allowfullscreen ' +
-      'src="https://www.youtube.com/embed/ir0klqtXPAw?autoplay=1&playsinline=1&controls=0&loop=1&playlist=ir0klqtXPAw"></iframe>';
-    stage.style.display = 'block';
+    const v = document.getElementById('beaver');
+    stage.style.display = 'flex';
+    v.muted = false;
+    v.volume = 1;            // max volume the page is allowed to set
+    v.currentTime = 0;
+    v.play();
     stage.requestFullscreen?.().catch(() => {});
   });
 </script>
