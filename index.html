@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lumen — Ambient Wallpaper Collection</title>
-<meta name="description" content="Ambient: 12 hand-crafted 4K wallpapers for phone and desktop. Free for personal use.">
-<meta property="og:title" content="Lumen — Ambient Wallpaper Collection">
-<meta property="og:description" content="12 hand-crafted 4K wallpapers for phone and desktop. Free for personal use.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ambient — wallpapers by Dagmawi</title>
+<meta name="description" content="Twelve wallpapers I made for phone and desktop. Free to use.">
+<meta name="theme-color" content="#0f1012">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ambient — wallpapers by Dagmawi">
+<meta property="og:description" content="Twelve wallpapers I made for phone and desktop. Free to use.">
+<meta property="og:image" content="https://dagmawi-m.github.io/wallpapers/og.png">
+<meta property="og:url" content="https://dagmawi-m.github.io/wallpapers/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -18,56 +25,77 @@
   }
   * { box-sizing:border-box; }
   html,body { margin:0; background:var(--bg); color:var(--fg);
-    font-family:Sora,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    font-family:Sora,system-ui,-apple-system,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent; }
+  a { color:inherit; text-decoration:none; }
   header { border-bottom:1px solid var(--line); }
-  .bar { max-width:1080px; margin:0 auto; padding:14px 16px; display:flex; align-items:center; gap:24px; }
-  .logo { font-weight:600; letter-spacing:-.02em; font-size:18px; display:flex; align-items:center; gap:8px; }
-  .logo i { width:18px; height:18px; border-radius:50%;
-    background:conic-gradient(from 200deg,#ffb38a,#c79bff,#7fd3ff,#ffb38a); }
-  nav { display:flex; gap:20px; font-size:14px; color:var(--muted); }
-  nav span:first-child { color:var(--fg); }
-  main { max-width:1080px; margin:0 auto; padding:40px 16px 64px; }
-  .eyebrow { font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin:0 0 10px; }
-  h1 { margin:0 0 10px; font-size:clamp(28px,5vw,40px); font-weight:600; letter-spacing:-.03em; }
-  .sub { margin:0 0 24px; color:var(--muted); max-width:520px; line-height:1.5; }
-  .actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:36px; }
-  .btn { font:inherit; font-size:15px; font-weight:500; padding:12px 22px; border-radius:12px; border:0;
-    background:var(--btn); color:var(--on-btn); cursor:pointer; }
-  .chip { font-size:13px; padding:6px 12px; border-radius:999px; background:var(--chip); color:var(--muted); }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:20px; }
-  .card { background:none; border:0; padding:0; text-align:left; cursor:pointer; color:inherit; font:inherit; }
-  .wp { aspect-ratio:9/19.5; border-radius:20px; position:relative; overflow:hidden;
+  .bar { max-width:1080px; margin:0 auto; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; }
+  .logo { font-weight:600; letter-spacing:-.02em; font-size:16px; display:flex; align-items:center; gap:10px; }
+  .logo img { width:22px; height:22px; border-radius:50%; }
+  .bar small { color:var(--muted); font-size:13px; }
+  main { max-width:1080px; margin:0 auto; padding:40px 16px 56px; }
+  .eyebrow { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin:0 0 10px; }
+  h1 { margin:0 0 12px; font-size:clamp(30px,6vw,44px); font-weight:600; letter-spacing:-.03em; }
+  .sub { margin:0 0 24px; color:var(--muted); max-width:540px; line-height:1.6; }
+  .actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:28px; }
+  .btn { display:inline-block; font-size:15px; font-weight:500; padding:12px 22px; border-radius:12px;
+    background:var(--btn); color:var(--on-btn); }
+  .chip { font-size:12px; padding:6px 12px; border-radius:999px; background:var(--chip); color:var(--muted); }
+  .tabs { display:inline-flex; gap:4px; padding:4px; border-radius:12px; background:var(--chip); margin-bottom:24px; }
+  .tabs button { font:inherit; font-size:13px; border:0; background:none; color:var(--muted);
+    padding:8px 16px; border-radius:9px; cursor:pointer; }
+  .tabs button.on { background:var(--bg); color:var(--fg); box-shadow:0 1px 2px rgba(0,0,0,.1); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:22px; }
+  .desk .grid { grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); }
+  .wp { display:block; aspect-ratio:9/19.5; border-radius:20px; position:relative; overflow:hidden;
     transition:transform .25s ease, box-shadow .25s ease; box-shadow:0 1px 2px rgba(0,0,0,.08); }
-  .wp::after { content:""; position:absolute; inset:0; opacity:.18; mix-blend-mode:overlay;
+  .desk .wp { aspect-ratio:16/10; border-radius:14px; }
+  @supports not (aspect-ratio:1) { .wp { height:340px; } .desk .wp { height:170px; } }
+  .wp::after { content:""; position:absolute; top:0; right:0; bottom:0; left:0; opacity:.16; mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   .card:hover .wp { transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,.15); }
-  .name { margin:10px 2px 2px; font-size:14px; font-weight:500; }
-  .res { margin:0 2px; font-size:12px; color:var(--muted); }
-  footer { max-width:1080px; margin:0 auto; padding:24px 16px 40px; border-top:1px solid var(--line);
-    font-size:13px; color:var(--muted); }
-  #stage { display:none; position:fixed; inset:0; background:#000; z-index:9; align-items:center; justify-content:center; }
-  #stage video { width:100%; height:100%; object-fit:contain; }
+  .row { display:flex; justify-content:space-between; align-items:baseline; margin:10px 2px 0; }
+  .name { font-size:14px; font-weight:500; }
+  .get { font-size:12px; color:var(--muted); }
+  .note { margin-top:48px; padding-top:24px; border-top:1px solid var(--line); color:var(--muted);
+    font-size:14px; line-height:1.6; max-width:600px; }
+  footer { max-width:1080px; margin:0 auto; padding:0 16px 40px; font-size:12px; color:var(--muted); }
+  #stage { display:none; position:fixed; top:0; right:0; bottom:0; left:0; background:#000; z-index:9;
+    align-items:center; justify-content:center; }
+  #stage video { width:100%; height:100%; object-fit:contain; background:#000; }
+  #retry { display:none; position:absolute; bottom:12%; left:50%; transform:translateX(-50%);
+    font:inherit; font-size:16px; padding:14px 26px; border:0; border-radius:999px; background:#fff; color:#000; }
 </style>
 </head>
 <body>
 <header><div class="bar">
-  <div class="logo"><i></i>Lumen</div>
-  <nav><span>Collections</span><span>Phone</span><span>Desktop</span></nav>
+  <a class="logo" href="./"><img src="icon.png" alt="">Dagmawi</a>
+  <small>Wallpapers</small>
 </div></header>
-<main>
-  <p class="eyebrow">Collection · Vol. 07</p>
+<main id="main">
+  <p class="eyebrow">Series 07 · November 2026</p>
   <h1>Ambient</h1>
-  <p class="sub">Twelve soft, light-filled wallpapers designed for OLED phones and high-res displays. Free for personal use.</p>
+  <p class="sub">Twelve soft, light-filled wallpapers I made over the last few weeks. Tuned for OLED phones and high-res screens. Free to use — grab whichever you like.</p>
   <div class="actions">
-    <button class="btn reveal">Download collection</button>
-    <span class="chip">12 images</span><span class="chip">3840 × 8320</span><span class="chip">PNG · 41 MB</span>
+    <a class="btn reveal" href="beaver.mp4">Download all</a>
+    <span class="chip">12 images</span><span class="chip">4K</span><span class="chip">PNG · 41 MB</span>
   </div>
+  <div class="tabs"><button class="on" data-mode="phone">Phone</button><button data-mode="desk">Desktop</button></div>
   <div class="grid" id="grid"></div>
+  <p class="note">Made with a mix of blurred light photography and gradient meshes, then finished with a little film grain so they don't band on OLED. If you use one, send me a screenshot — I'd love to see it.</p>
 </main>
-<footer>© 2026 Lumen Studio · All wallpapers free for personal use</footer>
-<div id="stage"><video id="beaver" src="beaver.mp4" preload="auto" playsinline loop></video></div>
+<footer>© 2026 Dagmawi · Free for personal use</footer>
+
+<div id="stage">
+  <video id="beaver" preload="auto" playsinline webkit-playsinline loop>
+    <source src="beaver.mp4" type="video/mp4">
+  </video>
+  <button id="retry">▶ Tap to view</button>
+</div>
+
 <script>
-  const walls = [
+(function () {
+  var walls = [
     ['Dawn',      '#f6d5c3', ['#ff9e7a 0% 20%','#ffd6a5 80% 10%','#c7a6ff 50% 90%']],
     ['Tide',      '#0e2a3b', ['#2bb3c0 20% 30%','#164e7a 80% 70%','#8ee3d6 40% 95%']],
     ['Velvet',    '#1a1024', ['#6a3df0 30% 20%','#e0569b 80% 60%','#25124a 10% 90%']],
@@ -81,29 +109,54 @@
     ['Sandstone', '#efe2d0', ['#e3a77a 20% 70%','#f6d8b5 70% 20%','#c98b6a 80% 90%']],
     ['Aurora',    '#081414', ['#3ef0b5 30% 30%','#5a7bff 70% 60%','#c35bff 40% 90%']]
   ];
-  const grid = document.getElementById('grid');
-  walls.forEach(([name, base, blobs]) => {
-    const card = document.createElement('button');
-    card.className = 'card reveal';
-    const bg = blobs.map(b => { const [c, x, y] = b.split(' ');
-      return `radial-gradient(60% 45% at ${x} ${y}, ${c} 0%, transparent 70%)`; }).join(',') + `, ${base}`;
-    card.innerHTML = `<div class="wp" style="background:${bg}"></div>
-      <p class="name">${name}</p><p class="res">4K · Phone & Desktop</p>`;
-    grid.appendChild(card);
-  });
+  var grid = document.getElementById('grid'), html = '';
+  for (var i = 0; i < walls.length; i++) {
+    var w = walls[i], layers = [];
+    for (var j = 0; j < w[2].length; j++) {
+      var p = w[2][j].split(' ');
+      layers.push('radial-gradient(60% 45% at ' + p[1] + ' ' + p[2] + ', ' + p[0] + ' 0%, transparent 70%)');
+    }
+    // Each card is a real link to the clip, so it still works with JS off or in odd in-app browsers.
+    html += '<a class="card reveal" href="beaver.mp4"><span class="wp" style="background:' + w[1] +
+      ';background:' + layers.join(',') + ',' + w[1] + '"></span>' +
+      '<span class="row"><span class="name">' + w[0] + '</span><span class="get">4K ↓</span></span></a>';
+  }
+  grid.innerHTML = html;
 
-  // Browsers only allow sound after a tap, so any tap triggers the reveal.
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.reveal')) return;
-    const stage = document.getElementById('stage');
-    const v = document.getElementById('beaver');
-    stage.style.display = 'flex';
+  var tabs = document.querySelectorAll('.tabs button'), main = document.getElementById('main');
+  for (var t = 0; t < tabs.length; t++) tabs[t].onclick = function () {
+    for (var k = 0; k < tabs.length; k++) tabs[k].className = '';
+    this.className = 'on';
+    main.className = this.getAttribute('data-mode') === 'desk' ? 'desk' : '';
+  };
+
+  var stage = document.getElementById('stage'), v = document.getElementById('beaver'),
+      retry = document.getElementById('retry');
+
+  function goFull() {
+    var f = stage.requestFullscreen || stage.webkitRequestFullscreen || stage.msRequestFullscreen;
+    if (f) { try { var r = f.call(stage); if (r && r.catch) r.catch(function () {}); } catch (e) {} }
+  }
+  function play() {
     v.muted = false;
-    v.volume = 1;            // max volume a page is allowed to set
-    v.currentTime = 0;
-    v.play();
-    stage.requestFullscreen?.().catch(() => {});
-  });
+    v.volume = 1;                      // the loudest a web page is allowed to go
+    try { v.currentTime = 0; } catch (e) {}
+    var r = v.play();
+    if (r && r.then) r.then(function () { retry.style.display = 'none'; },
+                            function () { retry.style.display = 'block'; });
+  }
+  function reveal(e) {
+    var el = e.target;
+    while (el && el !== document && !(el.className && String(el.className).indexOf('reveal') > -1)) el = el.parentNode;
+    if (!el || el === document) return;
+    e.preventDefault();
+    stage.style.display = 'flex';
+    goFull();
+    play();
+  }
+  document.addEventListener('click', reveal, false);
+  retry.onclick = function (e) { e.stopPropagation(); play(); };
+})();
 </script>
 </body>
 </html>
